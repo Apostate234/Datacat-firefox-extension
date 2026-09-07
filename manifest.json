@@ -36,7 +36,32 @@
     "https://*.datacat.run/*"
   ],
   "background": {
-    "scripts": ["background/index.js"]
+    "scripts": [
+      "background/firefox_polyfill.js",
+      "shared/source_vault_core.js",
+      "shared/source_vault_queue.js",
+      "shared/storage_keys.js",
+      "shared/errors.js",
+      "shared/messages.js",
+      "shared/contracts.js",
+      "shared/policy.js",
+      "generated/source_registry.js",
+      "background/constants.js",
+      "background/chrome_adapters.js",
+      "background/broadcasts.js",
+      "background/storage.js",
+      "background/source_accounts.js",
+      "background/extraction_personas.js",
+      "background/thumbnails.js",
+      "background/datacat_client.js",
+      "background/retrieved_store.js",
+      "background/tab_state.js",
+      "background/creator_store.js",
+      "background/janny_recovery.js",
+      "background/queue_worker.js",
+      "background/router.js",
+      "background/index.js"
+    ]
   },
   "action": {
     "default_title": "Open Pincat",
@@ -83,6 +108,16 @@
         "content/isolated.js"
       ],
       "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://datacat.run/*",
+        "https://*.datacat.run/*"
+      ],
+      "js": [
+        "content/datacat_bridge.js"
+      ],
+      "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
@@ -106,11 +141,5 @@
         "https://www.saucepan.ai/*"
       ]
     }
-  ],
-  "externally_connectable": {
-    "matches": [
-      "https://datacat.run/*",
-      "https://*.datacat.run/*"
-    ]
-  }
+  ]
 }
