@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" class="skin-bauhaus">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pincat by Cressida Settings</title>
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="sidebar-bauhaus.css">
+    <link rel="stylesheet" href="settings-bauhaus.css">
+  </head>
+  <body>
+    <main class="settings-shell">
+      <header class="settings-header">
+        <div>
+          <h1>Pincat by Cressida Settings</h1>
+          <p id="settingsStatus" class="settings-subtitle">Manage connections, preferences, and local storage.</p>
+        </div>
+        <button id="closeSettingsButton" class="mini-button">Close</button>
+      </header>
+
+      <nav class="settings-tabs" role="tablist" aria-label="Settings sections">
+        <button class="settings-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="settingsPanelConnections" data-settings-tab="connections">Connections</button>
+        <button class="settings-tab" type="button" role="tab" aria-selected="false" aria-controls="settingsPanelPreferences" data-settings-tab="preferences">Preferences</button>
+        <button class="settings-tab" type="button" role="tab" aria-selected="false" aria-controls="settingsPanelStorage" data-settings-tab="storage">Storage</button>
+      </nav>
+
+      <div id="settingsPanelConnections" class="settings-panel" role="tabpanel" data-settings-panel="connections">
+        <section class="settings-card datacat-settings-card">
+          <div class="settings-card-header datacat-connection-header">
+            <div class="datacat-connection-main">
+              <div class="settings-label">Datacat connection</div>
+              <div class="datacat-site-editor">
+                <div id="datacatOriginDisplayRow" class="datacat-origin-display-row">
+                  <span class="datacat-origin-label">Source Site</span>
+                  <span class="datacat-origin-separator" aria-hidden="true">-</span>
+                  <strong id="datacatConnectionOrigin" class="datacat-origin-display">https://datacat.run</strong>
+                  <span class="datacat-origin-store-note">Chrome Web Store edition</span>
+                </div>
+                <div id="datacatOriginEditor" class="settings-row datacat-origin-row" hidden>
+                  <label class="sr-only" for="datacatOriginInput">Datacat site URL</label>
+                  <input id="datacatOriginInput" class="datacat-origin-input" type="url" autocomplete="url" spellcheck="false" placeholder="https://datacat.run">
+                  <button id="saveOriginButton" class="mini-button primary" type="button" disabled>Save</button>
+                  <button id="cancelOriginEditButton" class="mini-button" type="button">Cancel</button>
+                  <p class="settings-help datacat-site-help">Changing sites unlinks the previous Datacat account.</p>
+                </div>
+              </div>
+              <div class="datacat-connection-status-row">
+                <div class="datacat-connection-status-copy">
+                  <div class="datacat-connection-summary">
+                    <span id="datacatConnectionBadge" class="connection-state is-pending">CHECKING</span>
+                    <strong id="datacatConnectionIdentity">Checking selected site...</strong>
+                  </div>
+                  <p id="datacatStatusText" class="settings-help datacat-status-message"></p>
+                </div>
+                <div class="datacat-connection-actions">
+                  <button id="loginDatacatButton" class="mini-button primary" type="button">Link Datacat</button>
+                  <button id="unlinkDatacatButton" class="mini-button danger" type="button" hidden>Unlink</button>
+                  <button id="checkDatacatButton" class="mini-button" type="button">Check now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-card">
+          <div class="settings-label">Source accounts</div>
+          <p class="settings-help">Pincat checks one open tab for each source. Saved account decisions remain listed even when that source is not open.</p>
+          <div id="sourceAccountList" class="source-account-list"></div>
+          <p id="sourceAccountStatus" class="settings-help">Loading source account sessions...</p>
+        </section>
+      </div>
+
+      <div id="settingsPanelPreferences" class="settings-panel" role="tabpanel" data-settings-panel="preferences" hidden>
+        <section class="settings-card">
+          <div class="settings-label">Default Datacat visibility</div>
+          <div class="settings-visibility" role="radiogroup" aria-label="Default Datacat visibility">
+            <button class="visibility-option" data-visibility="public" role="radio" aria-checked="false">Public</button>
+            <button class="visibility-option" data-visibility="mine" role="radio" aria-checked="false">Mine</button>
+          </div>
+          <p class="settings-help">The sidebar can still change visibility for an individual page before saving it.</p>
+        </section>
+
+        <section class="settings-card">
+          <div class="settings-card-header">
+            <div>
+              <label class="settings-label" for="jobTimeoutMinutesInput">Job timeout</label>
+              <p class="settings-help">Maximum time for one retrieval. When time runs out, Pincat marks that item failed and continues with the next queued item.</p>
+            </div>
+            <div class="settings-number-field">
+              <input id="jobTimeoutMinutesInput" class="settings-number-input" type="number" min="1" max="30" step="1" inputmode="numeric" value="2">
+              <span>minutes</span>
+            </div>
+          </div>
+          <p id="jobTimeoutStatus" class="settings-help" aria-live="polite"></p>
+        </section>
+
+        <section class="settings-card appearance-settings-card">
+          <div class="settings-card-header">
+            <div>
+              <div class="settings-label">Appearance</div>
+              <p class="settings-help">Switch interfaces without reinstalling Pincat.</p>
+            </div>
+            <div id="skinSelector" class="skin-selector" role="radiogroup" aria-label="Pincat interface skin">
+              <button class="skin-option is-active" data-skin="bauhaus" role="radio" aria-checked="true">Bauhaus</button>
+              <button class="skin-option" data-skin="classic" role="radio" aria-checked="false">Classic</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="settingsPanelStorage" class="settings-panel" role="tabpanel" data-settings-panel="storage" hidden>
+        
+
+        <section class="settings-card">
+          <div class="settings-card-header">
+            <div>
+              <div class="settings-label">Chrome storage</div>
+              <p id="storageStatusText" class="settings-help">Checking extension storage...</p>
+            </div>
+            <button id="refreshStorageStatsButton" class="mini-button" type="button">Refresh</button>
+          </div>
+          <div id="storageStatsGrid" class="storage-stats-grid">
+            <div class="storage-stat"><span>Used</span><strong>Checking...</strong></div>
+            <div class="storage-stat"><span>Thumbnails</span><strong>Checking...</strong></div>
+            <div class="storage-stat"><span>Keys</span><strong>Checking...</strong></div>
+          </div>
+          <div class="settings-danger-row">
+            <div class="settings-help">Clear all Pincat history, cached thumbnails, sessions, decisions, and Datacat connection state on this Chrome profile.</div>
+            <button id="clearAllStorageButton" class="mini-button danger" type="button">Clear all</button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div id="sourceAccountConfirmModal" class="settings-modal" hidden>
+      <div class="settings-modal-backdrop" data-modal-action="cancel"></div>
+      <section class="settings-modal-card" role="dialog" aria-modal="true" aria-labelledby="sourceAccountConfirmTitle">
+        <h2 id="sourceAccountConfirmTitle">Confirm source account decision</h2>
+        <p id="sourceAccountConfirmText" class="settings-modal-copy"></p>
+        <div class="settings-modal-actions">
+          <button id="sourceAccountConfirmCancel" class="mini-button" type="button">Cancel</button>
+          <button id="sourceAccountConfirmReject" class="mini-button danger" type="button" hidden>Reject</button>
+          <button id="sourceAccountConfirmApply" class="mini-button" type="button">Confirm</button>
+        </div>
+      </section>
+    </div>
+    <script src="shared/storage_keys.js"></script>
+    <script src="shared/errors.js"></script>
+    <script src="shared/messages.js"></script>
+    <script src="ui/runtime_health.js"></script>
+    <script src="shared/contracts.js"></script>
+    <script src="generated/source_registry.js"></script>
+    <script src="ui/skin.js"></script>
+    <script src="ui/settings/render.js"></script>
+    <script src="ui/settings/index.js"></script>
+  </body>
+</html>

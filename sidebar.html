@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" class="skin-bauhaus">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pincat by Cressida</title>
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="sidebar-bauhaus.css">
+  </head>
+  <body>
+    <main class="shell">
+      <div id="sidebarScrollRegion" class="sidebar-scroll-region">
+        <div class="sidebar-sticky-header">
+          <section id="announcementPanel" class="announcement-panel" hidden></section>
+
+          <nav class="main-tabs" aria-label="Pincat sections">
+            <div class="main-tab-list" role="tablist">
+              <button id="currentPageTab" class="main-tab is-active" data-main-tab="detected" role="tab" aria-selected="true">Retrieve</button>
+              <button id="charactersTab" class="main-tab" data-main-tab="recent" role="tab" aria-selected="false">Activity</button>
+            </div>
+            <section id="uploadVisibilityNav" class="main-tabs-visibility" hidden></section>
+            <div class="top-actions" aria-label="Pincat controls">
+              <button id="refreshButton" class="icon-button refresh-button" title="Refresh current page state" aria-label="Refresh current page state">↻</button>
+              <button id="settingsButton" class="icon-button settings-button" title="Pincat settings" aria-label="Pincat settings">⚙</button>
+            </div>
+          </nav>
+
+          <section id="activeRetrievalIndicator" class="active-retrieval-indicator" hidden aria-live="polite"></section>
+          <section id="downloadStatusBanner" class="download-status-banner" hidden aria-live="polite"></section>
+        </div>
+
+        <section class="companion-card">
+          <section id="currentPageView" class="tab-view detected-view">
+            <section id="authPanel" class="sr-only"></section>
+            <section id="sourceSessionLine" class="source-session-line" hidden></section>
+            <section id="accountGatePanel" class="account-gate-panel" hidden></section>
+            <section id="characterPanel" class="current-page-card"></section>
+
+            <div class="request-inline" hidden>
+              <section class="actions">
+                <button id="retrieveButton" class="primary" disabled>Pin It!</button>
+                <button id="retrieveAgainLink" class="text-link-button" hidden>pin again</button>
+              </section>
+              <section id="uploadOptionsPanel" class="upload-options-panel"></section>
+            </div>
+            <div id="preflightStatus" class="preflight-status" hidden></div>
+            <section id="retrievalActivityPanel" class="panel retrieval-activity-panel" hidden></section>
+            <section id="currentDetailsPanel" class="panel current-details-panel" hidden></section>
+            <button id="captureButton" class="secondary capture-toggle" disabled hidden>Show local JSON</button>
+            <textarea id="captureText" class="capture-text" readonly hidden></textarea>
+          </section>
+
+          <section id="charactersView" class="tab-view history-view" hidden>
+            <section id="activityToolbar" class="activity-toolbar" aria-label="Filter pinned characters">
+              <label class="activity-search-field">
+                <span class="sr-only">Search pinned characters</span>
+                <input id="activitySearchInput" type="search" autocomplete="off" placeholder="Search pins">
+              </label>
+              <label class="activity-source-field">
+                <span class="sr-only">Filter by source</span>
+                <select id="activitySourceFilter">
+                  <option value="all">All sources</option>
+                  <option value="janitor">Janitor</option>
+                  <option value="saucepan">Saucepan</option>
+                </select>
+              </label>
+              <section id="activityDownloadActions" class="activity-download-actions" aria-label="Download local pins"></section>
+              <span id="activityResultCount" class="activity-result-count" aria-live="polite"></span>
+            </section>
+            <section id="retrievedPanel" class="panel retrieved-panel"></section>
+          </section>
+        </section>
+      </div>
+      <footer id="datacatPanel" class="datacat-status-panel" aria-label="Datacat connection"></footer>
+    </main>
+    <dialog id="queueAddDialog" class="queue-dialog">
+      <form method="dialog" class="queue-dialog-form">
+        <div class="queue-dialog-header">
+          <div>
+            <div class="kicker">Bulk queue</div>
+            <div class="panel-title">Add character URLs</div>
+          </div>
+          <button class="icon-button" value="cancel" aria-label="Close">×</button>
+        </div>
+        <textarea id="queueUrlInput" rows="9" placeholder="Paste Janitor or Saucepan character URLs, one per line"></textarea>
+        <div id="queueUrlPreview" class="queue-url-preview">Up to 100 outstanding characters.</div>
+        <div class="queue-dialog-actions">
+          <button class="secondary" value="cancel">Cancel</button>
+          <button id="queueAddSubmit" class="primary" value="default" type="button">Add to queue</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="creatorQueueConfirmDialog" class="queue-dialog creator-queue-confirm-dialog">
+      <form method="dialog" class="queue-dialog-form">
+        <div class="queue-dialog-header">
+          <div>
+            <div class="kicker">Bulk queue</div>
+            <div class="panel-title">Add creator characters?</div>
+          </div>
+          <button class="icon-button" value="cancel" aria-label="Close">×</button>
+        </div>
+        <div id="creatorQueueConfirmMessage" class="queue-confirm-message"></div>
+        <div class="queue-confirm-note">There can be up to 100 characters in the queue at one time.</div>
+        <div class="queue-dialog-actions">
+          <button class="secondary" value="cancel">Cancel</button>
+          <button id="creatorQueueConfirmSubmit" class="primary" value="default" type="button">Add to queue</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="sourceAccountReviewDialog" class="source-account-review-dialog">
+      <form method="dialog" class="source-account-review-form">
+        <h2 id="sourceAccountReviewTitle">Use this account for retrieval?</h2>
+        <p id="sourceAccountReviewText" class="source-account-review-copy">
+          Only use a <strong>separate source account created for Pincat</strong>.
+        </p>
+        <div class="source-account-review-actions">
+          <button id="sourceAccountReviewCancel" class="secondary" value="cancel" type="button">Not now</button>
+          <button id="sourceAccountReviewReject" class="secondary is-danger" value="reject" type="button">Reject</button>
+          <button id="sourceAccountReviewApprove" class="primary" value="approve" type="button">Use this account</button>
+        </div>
+      </form>
+    </dialog>
+    <script src="shared/source_vault_core.js"></script>
+    <script src="shared/character_card_public_export.js"></script>
+    <script src="shared/source_vault_exports.js"></script>
+    <script src="shared/source_vault_queue.js"></script>
+    <script src="shared/storage_keys.js"></script>
+    <script src="shared/errors.js"></script>
+    <script src="shared/messages.js"></script>
+    <script src="ui/runtime_health.js"></script>
+    <script src="shared/contracts.js"></script>
+    <script src="shared/policy.js"></script>
+    <script src="generated/source_registry.js"></script>
+    <script src="ui/skin.js"></script>
+    <script src="ui/sidebar/dom.js"></script>
+    <script src="ui/sidebar/store.js"></script>
+    <script src="ui/sidebar/selectors.js"></script>
+    <script src="ui/sidebar/effects.js"></script>
+    <script src="ui/sidebar/runtime_state.js"></script>
+    <script src="ui/sidebar/state_coordinator.js"></script>
+    <script src="ui/sidebar/presentation_helpers.js"></script>
+    <script src="ui/sidebar/downloads.js"></script>
+    <script src="ui/sidebar/runtime_effects.js"></script>
+    <script src="ui/sidebar/workflows.js"></script>
+    <script src="ui/sidebar/actions.js"></script>
+    <script src="ui/sidebar/views/datacat.js"></script>
+    <script src="ui/sidebar/views/account_gate.js"></script>
+    <script src="ui/sidebar/views/announcements.js"></script>
+    <script src="ui/sidebar/views/queue.js"></script>
+    <script src="ui/sidebar/views/activity.js"></script>
+    <script src="ui/sidebar/views/retrieve.js"></script>
+    <script src="ui/sidebar/views/creator_common.js"></script>
+    <script src="ui/sidebar/views/creator.js"></script>
+    <script src="ui/sidebar/views/diagnostics_stubs.js"></script>
+    <script src="ui/sidebar/render.js"></script>
+    <script src="ui/sidebar/index.js"></script>
+  </body>
+</html>

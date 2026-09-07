@@ -1,0 +1,406 @@
+html.skin-bauhaus body {
+  min-width: 640px;
+  background: var(--bg);
+}
+
+html.skin-bauhaus .settings-shell {
+  min-height: calc(100vh - 12px);
+  border: 1px solid var(--line-strong);
+  padding: 20px 24px 36px;
+  background: var(--surface);
+}
+
+html.skin-bauhaus .settings-header {
+  align-items: center;
+  max-width: 840px;
+  margin: 0 auto;
+  border-bottom: 2px solid var(--text);
+  padding: 0 0 14px;
+}
+
+html.skin-bauhaus .settings-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+html.skin-bauhaus .settings-tabs {
+  max-width: 840px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+html.skin-bauhaus .settings-tab {
+  min-height: 42px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+html.skin-bauhaus .settings-tab.is-active {
+  border-bottom-color: var(--accent);
+  background: transparent;
+  color: var(--text);
+}
+
+html.skin-bauhaus .settings-subtitle,
+html.skin-bauhaus .settings-help {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+html.skin-bauhaus .settings-card {
+  gap: 10px;
+  max-width: 840px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: 16px 0;
+  background: transparent;
+}
+
+html.skin-bauhaus .settings-header + .settings-card {
+  border-top: 0;
+}
+
+html.skin-bauhaus .settings-label {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+html.skin-bauhaus .settings-card-header {
+  align-items: center;
+}
+
+html.skin-bauhaus .appearance-settings-card {
+  gap: 14px;
+}
+
+html.skin-bauhaus .skin-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(92px, 1fr));
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: transparent;
+}
+
+html.skin-bauhaus .skin-option {
+  min-height: 32px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+html.skin-bauhaus .skin-option:first-child {
+  border-left: 0;
+}
+
+html.skin-bauhaus .skin-option.is-active {
+  border-bottom: 2px solid var(--accent);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+html.skin-bauhaus .diagnostics-setting-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+html.skin-bauhaus .settings-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+html.skin-bauhaus .settings-switch-track {
+  position: relative;
+  width: 32px;
+  height: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: var(--surface);
+}
+
+html.skin-bauhaus .settings-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 1px;
+  background: var(--muted);
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+html.skin-bauhaus .settings-switch.is-active {
+  color: var(--text);
+}
+
+html.skin-bauhaus .settings-switch.is-active .settings-switch-track {
+  border-color: var(--accent);
+}
+
+/* .settings-switch.is-active .settings-switch-thumb: transform/background are
+   byte-identical to settings.css (base), so the Bauhaus override is dropped and
+   the shared structural rule is inherited from the base sheet. */
+
+html.skin-bauhaus .settings-row {
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  gap: 5px;
+}
+
+html.skin-bauhaus .settings-row.datacat-origin-row {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+}
+
+html.skin-bauhaus .datacat-connection-summary {
+  margin-top: 0;
+}
+
+html.skin-bauhaus .datacat-connection-summary strong {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+html.skin-bauhaus .connection-state {
+  border-radius: 2px;
+  background: var(--surface-2);
+  font-weight: 700;
+}
+
+html.skin-bauhaus .datacat-site-editor {
+  border-top-color: var(--line);
+}
+
+html.skin-bauhaus .mini-button.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+html.skin-bauhaus .settings-row .datacat-origin-input {
+  min-height: 34px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: var(--surface);
+  font-size: 13px;
+}
+
+html.skin-bauhaus .settings-number-input {
+  border-radius: 2px;
+  background: var(--surface);
+}
+
+html.skin-bauhaus .settings-visibility {
+  grid-template-columns: repeat(2, minmax(0, 160px));
+  gap: 0;
+  width: fit-content;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+}
+
+html.skin-bauhaus .settings-visibility .visibility-option {
+  min-width: 130px;
+}
+
+html.skin-bauhaus .settings-download-row {
+  gap: 8px;
+}
+
+html.skin-bauhaus .extension-download-url {
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 8px;
+  background: var(--surface);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+html.skin-bauhaus .storage-stats-grid {
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+html.skin-bauhaus .storage-stat {
+  gap: 2px;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px;
+  background: transparent;
+}
+
+html.skin-bauhaus .storage-stat:last-child {
+  border-right: 0;
+}
+
+html.skin-bauhaus .storage-stat span,
+html.skin-bauhaus .storage-stat small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+html.skin-bauhaus .storage-stat strong {
+  font-size: 17px;
+  font-weight: 650;
+}
+
+html.skin-bauhaus .settings-danger-row {
+  border: 0;
+  border-left: 3px solid var(--danger);
+  border-radius: 0;
+  padding: 8px 10px;
+  background: transparent;
+}
+
+html.skin-bauhaus .source-account-list,
+html.skin-bauhaus .source-account-group,
+html.skin-bauhaus .source-account-group-list {
+  gap: 0;
+}
+
+html.skin-bauhaus .source-account-group + .source-account-group {
+  margin-top: 16px;
+}
+
+html.skin-bauhaus .source-account-group-title {
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+html.skin-bauhaus .source-account-row {
+  gap: 10px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px 0;
+  background: transparent;
+}
+
+html.skin-bauhaus .source-account-row.is-ok,
+html.skin-bauhaus .source-account-row.is-danger,
+html.skin-bauhaus .source-account-row.is-pending,
+html.skin-bauhaus .source-account-row.is-muted {
+  border-color: var(--line);
+  background: transparent;
+}
+
+html.skin-bauhaus .source-account-title {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+html.skin-bauhaus .source-account-state {
+  border: 0;
+  border-radius: 2px;
+  padding: 2px 5px;
+  background: var(--surface-2);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+html.skin-bauhaus .source-account-state.is-ok,
+html.skin-bauhaus .source-account-state.is-danger,
+html.skin-bauhaus .source-account-state.is-pending,
+html.skin-bauhaus .source-account-state.is-muted {
+  border: 0;
+  background: var(--surface-2);
+}
+
+html.skin-bauhaus .source-account-meta,
+html.skin-bauhaus .source-account-empty,
+html.skin-bauhaus .source-account-message {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+html.skin-bauhaus .settings-modal-backdrop {
+  background: var(--modal-backdrop);
+}
+
+html.skin-bauhaus .settings-modal-card {
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--accent);
+  border-radius: 2px;
+  background: var(--surface);
+  box-shadow: none;
+}
+
+html.skin-bauhaus .settings-modal.is-ok .settings-modal-card {
+  border-color: var(--line-strong);
+  border-left-color: var(--success);
+}
+
+html.skin-bauhaus .settings-modal.is-danger .settings-modal-card {
+  border-color: var(--line-strong);
+  border-left-color: var(--danger);
+}
+
+html.skin-bauhaus .settings-modal-card h2 {
+  font-size: 18px;
+  font-weight: 650;
+}
+
+html.skin-bauhaus .settings-modal-copy {
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  html.skin-bauhaus body {
+    min-width: 320px;
+  }
+
+  html.skin-bauhaus .settings-shell {
+    padding: 14px;
+  }
+
+  html.skin-bauhaus .settings-header,
+  html.skin-bauhaus .settings-row,
+  html.skin-bauhaus .settings-card-header,
+  html.skin-bauhaus .diagnostics-setting-row {
+    grid-template-columns: 1fr;
+  }
+
+  html.skin-bauhaus .settings-header {
+    display: grid;
+  }
+
+  html.skin-bauhaus .skin-selector,
+  html.skin-bauhaus .settings-visibility {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  html.skin-bauhaus .settings-visibility .visibility-option {
+    min-width: 0;
+  }
+}

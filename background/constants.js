@@ -1,0 +1,70 @@
+"use strict";
+// background/constants.js — shared background constants + MessageTypes/StorageKeys aliases
+// Extracted from background.js in Phase 2 (mechanical move; behavior unchanged).
+// Loaded in MV3 service-worker global scope via importScripts from background/index.js.
+// Depends (global scope) on: shared/messages.js, shared/storage_keys.js
+
+const MessageTypes = SourceVaultMessages.MessageTypes;
+const StorageKeys = SourceVaultStorageKeys.StorageKeys;
+
+const JANNY_TAB_CAPTURE_RETRY_MS = 1000;
+const SOURCE_PAGE_SETTLE_MS = 3500;
+const SOURCE_PAGE_CONFIRMATION_COUNT = 2;
+const EXTENSION_VARIANT = "source-vault-sidebar-v2-refactor";
+const RETRIEVED_STORAGE_KEY = StorageKeys.RETRIEVED_CHARACTERS;
+const CREATOR_STORAGE_KEY = StorageKeys.CREATORS;
+const DATACAT_CONFIG_STORAGE_KEY = StorageKeys.DATACAT_CONFIG;
+const COMPANION_INSTALLATIONS_STORAGE_KEY = StorageKeys.COMPANION_INSTALLATIONS;
+const UPLOAD_SETTINGS_STORAGE_KEY = StorageKeys.UPLOAD_SETTINGS;
+const WINDOW_UPLOAD_VISIBILITY_STORAGE_KEY = StorageKeys.WINDOW_UPLOAD_VISIBILITY;
+const DEFAULT_DATACAT_ORIGIN = "https://datacat.run";
+const DATACAT_UPLOAD_PATH = "/api/source-vault/uploads";
+const DATACAT_PREFLIGHT_PATH = "/api/source-vault/preflight";
+const DATACAT_ANNOUNCEMENTS_PATH = "/api/source-vault/announcements";
+const DATACAT_EXTENSION_VERSION_PATH = "/api/source-vault/extension/version";
+const DATACAT_COMPANION_ACTIVITY_PATH = "/api/source-vault/companion/activity";
+const DATACAT_COMPANION_CONNECT_PATH = "/api/source-vault/companion/installations/connect";
+const DATACAT_LINKAGE_SESSION_PATH = "/api/source-vault/companion/linkage/session";
+const DATACAT_COMPANION_CLIENT_KEY = "pincat_by_cressida";
+const DATACAT_COMPANION_TOKEN_HEADER = "x-datacat-companion-token";
+const DATACAT_UPLOAD_STATUS_PATH = "/api/source-vault/uploads";
+const DATACAT_BRIDGE_PATH = "/source-vault/extension-bridge";
+const DATACAT_BRIDGE_SESSION_KEY = StorageKeys.PENDING_DATACAT_BRIDGE;
+const DATACAT_BRIDGE_TTL_MS = 15 * 60 * 1000;
+const DEFAULT_UPLOAD_VISIBILITY = "public";
+const DEFAULT_JOB_TIMEOUT_MINUTES = 2;
+const MIN_JOB_TIMEOUT_MINUTES = 1;
+const MAX_JOB_TIMEOUT_MINUTES = 30;
+const ANNOUNCEMENT_DISMISS_STORAGE_KEY = StorageKeys.DISMISSED_ANNOUNCEMENTS;
+const SOURCE_ACCOUNT_APPROVALS_STORAGE_KEY = StorageKeys.SOURCE_ACCOUNT_APPROVALS;
+const EXTRACTION_PERSONA_STATE_STORAGE_KEY = StorageKeys.EXTRACTION_PERSONA_STATE;
+const TAB_USAGE_STORAGE_KEY = StorageKeys.TAB_USAGE;
+const THUMBNAIL_STORAGE_KEY = StorageKeys.THUMBNAIL_CACHE;
+const RETRIEVAL_QUEUE_STORAGE_KEY = StorageKeys.RETRIEVAL_QUEUE;
+const RETRIEVAL_QUEUE_ALARM = "source-vault-v2-queue-watchdog";
+const RETRIEVAL_QUEUE_JOB_DEADLINE_ALARM = "source-vault-v2-queue-job-deadline";
+const RETRIEVAL_QUEUE_IDLE_CLOSE_ALARM = "source-vault-v2-queue-idle-close";
+const RETRIEVAL_QUEUE_IDLE_CLOSE_RETRY_ALARM = "source-vault-v2-queue-idle-close-retry";
+const RETRIEVAL_QUEUE_WATCHDOG_MINUTES = 0.5;
+const RETRIEVAL_QUEUE_IDLE_CLOSE_MINUTES = 0.5;
+const RETRIEVAL_QUEUE_IDLE_CLOSE_RETRY_MINUTES = 0.5;
+const RETRIEVAL_QUEUE_SETTLE_MS = 2000;
+const RETRIEVAL_QUEUE_WORKER_RECOVERY_DELAY_MS = 500;
+const RETRIEVAL_QUEUE_CONNECTIVITY_RETRY_BASE_MS = 15 * 1000;
+const RETRIEVAL_QUEUE_RATE_LIMIT_RETRY_BASE_MS = 60 * 1000;
+const RETRIEVAL_QUEUE_CONNECTIVITY_RETRY_MAX_MS = 5 * 60 * 1000;
+const RETRIEVAL_QUEUE_PAGE_READY_MS = 25000;
+const SOURCE_ACCOUNT_APPROVAL_CONFIRMED = "confirmed_dedicated";
+const SOURCE_ACCOUNT_APPROVAL_REJECTED = "rejected";
+const ANNOUNCEMENT_CACHE_TTL_MS = 15 * 60 * 1000;
+const EXTENSION_VERSION_CACHE_TTL_MS = 5 * 60 * 1000;
+const CREATOR_CACHE_TTL_MS = 30 * 60 * 1000;
+const THUMBNAIL_SIZE_PX = 96;
+const THUMBNAIL_MAX_ENTRIES = 360;
+const THUMBNAIL_MAX_TOTAL_BYTES = 4 * 1024 * 1024;
+const THUMBNAIL_MAX_DATA_URL_BYTES = 120 * 1024;
+const THUMBNAIL_FETCH_TIMEOUT_MS = 12000;
+const DATACAT_FETCH_TIMEOUT_MS = 120000;
+const DATACAT_STATE_FETCH_TIMEOUT_MS = 8000;
+const THUMBNAIL_REF_BATCH_LIMIT = 160;
+const EXTENSION_LOCAL_STORAGE_KEYS = SourceVaultStorageKeys.EXTENSION_LOCAL_STORAGE_KEYS;
