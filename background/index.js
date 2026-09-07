@@ -1,62 +1,9 @@
 /* global SourceVaultCore, SourceVaultQueue */
 "use strict";
 
-// background/index.js — MV3 service-worker entry.
-//
-// Deterministic importScripts load order (shared vocabulary first, then background
-// modules from leaf helpers up to the router). Every module attaches its functions
-// and state to the shared service-worker global scope; nothing here uses ES modules,
-// so cross-module calls resolve at message/lifecycle time after all scripts load.
-//
-//   ../shared/source_vault_core.js
-//   ../shared/source_vault_queue.js
-//   ../shared/storage_keys.js
-//   ../shared/errors.js
-//   ../shared/messages.js
-//   ../shared/contracts.js
-//   ../shared/policy.js   (pure gate/preflight decision helpers)
-//   ../generated/source_registry.js (packaged source metadata)
-//   constants.js          (MessageTypes/StorageKeys aliases + config constants)
-//   chrome_adapters.js    (chrome.* wrappers + generic helpers)
-//   broadcasts.js         (broadcast/debug + sidebar event revision)
-//   storage.js            (datacat config / upload settings / storage stats)
-//   source_accounts.js    (identity + approval gate)
-//   extraction_personas.js (opaque per-install/source-account capture aliases)
-//   thumbnails.js         (thumbnail cache pipeline)
-//   datacat_client.js     (origin/session/preflight/announcements)
-//   retrieved_store.js    (saved characters + upload lifecycle)
-//   tab_state.js          (tabStates + nav epochs + content messaging)
-//   creator_store.js      (creator cache + retrieval)
-//   janny_recovery.js     (managed-tab capture + source-page continuation)
-//   queue_worker.js       (retrieval queue persistence + orchestration)
-//   router.js             (onMessage / onMessageExternal routing)
-//
-// index.js itself only registers lifecycle listeners + boot hydrate below.
-
-importScripts(
-  "../shared/source_vault_core.js",
-  "../shared/source_vault_queue.js",
-  "../shared/storage_keys.js",
-  "../shared/errors.js",
-  "../shared/messages.js",
-  "../shared/contracts.js",
-  "../shared/policy.js",
-  "../generated/source_registry.js",
-  "constants.js",
-  "chrome_adapters.js",
-  "broadcasts.js",
-  "storage.js",
-  "source_accounts.js",
-  "extraction_personas.js",
-  "thumbnails.js",
-  "datacat_client.js",
-  "retrieved_store.js",
-  "tab_state.js",
-  "creator_store.js",
-  "janny_recovery.js",
-  "queue_worker.js",
-  "router.js"
-);
+// background/index.js — Firefox compatible entry point.
+// importScripts has been removed because Firefox loads all scripts 
+// directly via the manifest.json's background.scripts array!
 
 chrome.runtime.onInstalled.addListener((details) => {
   if (details && details.reason !== "install") {
@@ -68,7 +15,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 
 chrome.runtime.onStartup.addListener(() => {
-  resumeQueueAfterLifecycle("Chrome restarted.").catch(() => {});
+  resumeQueueAfterLifecycle("Browser restarted.").catch(() => {});
 });
 
 if (chrome.alarms && chrome.alarms.onAlarm) {
@@ -108,6 +55,9 @@ if (chrome.windows && chrome.windows.onRemoved) {
 chrome.action.onClicked.addListener((tab) => {
   if (chrome.sidePanel && chrome.sidePanel.open && tab && tab.id) {
     chrome.sidePanel.open({ tabId: tab.id }).catch(() => {});
+  } else if (typeof browser !== 'undefined' && browser.sidebarAction && browser.sidebarAction.open) {
+    // Firefox specific logic to open the sidebar!
+    browser.sidebarAction.open().catch(() => {});
   }
 });
 
