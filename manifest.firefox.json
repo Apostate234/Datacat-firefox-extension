@@ -1,0 +1,128 @@
+{
+  "manifest_version": 3,
+  "name": "Pincat by Cressida",
+  "short_name": "Pincat",
+  "version": "0.21.4",
+  "version_name": "0.21.4",
+  "description": "Save supported character pages locally, export SillyTavern-compatible cards, and optionally sync selected captures to Datacat.",
+  "homepage_url": "https://datacat.run",
+  "incognito": "not_allowed",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "icons": {
+    "16": "icons/pincat-16.png",
+    "32": "icons/pincat-32.png",
+    "48": "icons/pincat-48.png",
+    "128": "icons/pincat-128.png"
+  },
+  "permissions": [
+    "alarms",
+    "scripting",
+    "storage",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://janitorai.com/*",
+    "https://www.janitorai.com/*",
+    "https://ella.janitorai.com/*",
+    "https://saucepan.ai/*",
+    "https://www.saucepan.ai/*",
+    "https://jannyai.com/*",
+    "https://www.jannyai.com/*",
+    "https://image.jannyai.com/*",
+    "https://datacat.run/*",
+    "https://*.datacat.run/*"
+  ],
+  "background": {
+    "service_worker": "background/browser_compat.js",
+    "scripts": ["background/index.js"]
+  },
+  "action": {
+    "default_title": "Open Pincat",
+    "default_icon": {
+      "16": "icons/pincat-16.png",
+      "32": "icons/pincat-32.png",
+      "48": "icons/pincat-48.png"
+    }
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "sidebar_action": {
+    "default_panel": "sidebar.html",
+    "default_icon": {
+      "16": "icons/pincat-16.png",
+      "32": "icons/pincat-32.png",
+      "48": "icons/pincat-48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://janitorai.com/*",
+        "https://www.janitorai.com/*",
+        "https://saucepan.ai/*",
+        "https://www.saucepan.ai/*",
+        "https://jannyai.com/*",
+        "https://www.jannyai.com/*"
+      ],
+      "js": [
+        "shared/source_vault_core.js",
+        "shared/source_vault_queue.js",
+        "shared/storage_keys.js",
+        "shared/errors.js",
+        "shared/messages.js",
+        "shared/contracts.js",
+        "generated/source_registry.js",
+        "sources/janitor/normalizer.js",
+        "sources/saucepan/normalizer.js",
+        "content/runtime.js",
+        "content/bridge_rpc.js",
+        "content/page_state.js",
+        "content/page_overlay.js",
+        "sources/janitor/janny_capture.js",
+        "content/janny_overlay.js",
+        "content/retrieval_orchestrator.js",
+        "content/isolated.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/page_bridge.js",
+        "content/sources/runtime.js",
+        "content/sources/adapter_api.js",
+        "generated/source_registry.js",
+        "sources/janitor/helpers.js",
+        "sources/janitor/page_adapter.js",
+        "sources/saucepan/client.js",
+        "sources/saucepan/parser.js",
+        "sources/saucepan/page_adapter.js",
+        "shared/source_vault_core.js"
+      ],
+      "matches": [
+        "https://janitorai.com/*",
+        "https://www.janitorai.com/*",
+        "https://saucepan.ai/*",
+        "https://www.saucepan.ai/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://datacat.run/*",
+      "https://*.datacat.run/*"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "pincat@cressida.dev",
+      "strict_min_version": "109.0"
+    }
+  }
+}
